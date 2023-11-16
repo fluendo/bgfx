@@ -1860,7 +1860,7 @@ namespace bgfx { namespace d3d12
 			_flags |= writeOnly ? BGFX_TEXTURE_RT_WRITE_ONLY : 0;
 			_flags |= computeWrite ? BGFX_TEXTURE_COMPUTE_WRITE : 0;
 			ref.init(
-				BackbufferRatio::Equal,
+				BackbufferRatio::Count,
 				(uint16_t)desc.Width,
 				(uint16_t)desc.Height,
 				1 /*depth*/,
