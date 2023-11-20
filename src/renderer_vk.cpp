@@ -2304,6 +2304,11 @@ VK_IMPORT_DEVICE
 			return nullptr;
 		}
 
+		void textureWrappedRecoverState(TextureHandle /* _handle*/) override
+		{
+			BX_ASSERT(0, "Not implemented yet");
+		}
+
 		TextureRef createTextureWrappedRef(TextureHandle /*_handle*/, void* /*_specific_platform_wrapping_data*/) override
 		{
 			BX_ASSERT(0, "Not implemented yet");

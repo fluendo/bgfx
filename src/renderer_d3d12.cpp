@@ -1845,6 +1845,12 @@ namespace bgfx { namespace d3d12
 			return m_textures[_handle.idx].create(_specific_platform_wrapping_data);
 		}
 
+		void textureWrappedRecoverState(TextureHandle _handle) override
+		{
+			m_textures[_handle.idx].setState(m_commandList, m_textures[_handle.idx].m_wrapState);
+			kick();
+		}
+
 		TextureRef createTextureWrappedRef(TextureHandle _handle, void* _specific_platform_wrapping_data) override
 		{
 			TextureRef ref{};
@@ -2314,6 +2320,7 @@ namespace bgfx { namespace d3d12
 
 		void fenceSignal(FenceHandle _handle, uint64_t _value) override
 		{
+
 			DX_CHECK(m_cmd.m_commandQueue->Signal(m_fences[_handle.idx].m_fence, _value));
 		}
 
@@ -5556,7 +5563,7 @@ namespace bgfx { namespace d3d12
 		ID3D12Device* device = s_renderD3D12->m_device;
 		ID3D12GraphicsCommandList* commandList = s_renderD3D12->m_commandList;
 
-		m_state = wrap->state;
+		m_wrapState = m_state = wrap->state;
 		setState(commandList, s_heapProperties[HeapProperty::Texture].m_state);
 		setState(commandList, nextState);
 

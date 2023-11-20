@@ -3166,9 +3166,19 @@ namespace bgfx
 			}
 			break;
 
+			case CommandBuffer::TextureWrappedRecoverState:
+			{
+				TextureHandle handle;
+				_cmdbuf.read(handle);
+				m_renderCtx->textureWrappedRecoverState(handle);
+
+			}
+			break;
+
 			case CommandBuffer::FenceSignal:
 			{
 				BGFX_PROFILER_SCOPE("FenceSignal", 0xff2040ff);
+
 				FenceHandle handle;
 				_cmdbuf.read(handle);
 				uint64_t value;
@@ -4922,6 +4932,11 @@ namespace bgfx
 	TextureHandle createTextureWrapped(void* _platform_specific_wrapping_data)
 	{
 		return s_ctx->createTextureWrapped(_platform_specific_wrapping_data);
+	}
+
+	void textureWrappedRecoverState(TextureHandle _handle)
+	{
+		return s_ctx->textureWrappedRecoverState(_handle);
 	}
 
 	FenceHandle createFence(uint64_t _initialValue, uint64_t _flags)

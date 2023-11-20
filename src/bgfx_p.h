@@ -908,6 +908,7 @@ namespace bgfx
 			CreateProgram,
 			CreateTexture,
 			CreateTextureWrapped,
+			TextureWrappedRecoverState,
 			FenceSignal,
 			UpdateTexture,
 			ResizeTexture,
@@ -3079,6 +3080,8 @@ namespace bgfx
 		virtual void destroyProgram(ProgramHandle _handle) = 0;
 		virtual void* createTexture(TextureHandle _handle, const Memory* _mem, uint64_t _flags, uint8_t _skip) = 0;
 		virtual void* createTextureWrapped(TextureHandle _handle, void *_platform_specific_wrapping_data) = 0;
+		virtual void textureWrappedRecoverState(TextureHandle _handle) = 0;
+
 		virtual void createFence(FenceHandle _handle, uint64_t _initialValue, uint64_t _flags) = 0;
 		virtual void fenceSignal(FenceHandle _handle, uint64_t _value) = 0;
 		virtual void fenceWaitCPUSide(FenceHandle _handle, uint64_t _value) = 0;
@@ -4589,8 +4592,15 @@ namespace bgfx
 			CommandBuffer& cmdbuf = getCommandBuffer(CommandBuffer::CreateTextureWrapped);
 			cmdbuf.write(handle);
 			cmdbuf.write(_specific_platform_wrapping_data);
-			setDebugNameForHandle(handle);
+			setDebugNameForHandle(handle, "Wrapped");
 			return handle;
+		}
+
+		BGFX_API_FUNC(void textureWrappedRecoverState(TextureHandle _handle))
+		{
+			BGFX_MUTEX_SCOPE(m_resourceApiLock);
+			CommandBuffer& cmdbuf = getCommandBuffer(CommandBuffer::TextureWrappedRecoverState);
+			cmdbuf.write(_handle);
 		}
 
 		BGFX_API_FUNC(FenceHandle createFence(uint64_t _initialValue, uint64_t _flags))

@@ -348,6 +348,7 @@ namespace bgfx { namespace d3d12
 		ID3D12Resource* m_singleMsaa;
 		void* m_directAccessPtr;
 		D3D12_RESOURCE_STATES m_state;
+		D3D12_RESOURCE_STATES m_wrapState;
 		uint64_t m_flags;
 		uint32_t m_width;
 		uint32_t m_height;
