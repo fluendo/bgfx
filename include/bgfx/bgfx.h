@@ -2821,6 +2821,7 @@ namespace bgfx
 		void* _platform_specific_wrapping_data
 	    );
 
+	void textureWrappedRecoverState(TextureHandle _handle);
 
 	FenceHandle createFence(uint64_t _initialValue, uint64_t _flags = 0);
 	void fenceSignal(FenceHandle _handle, uint64_t _value);

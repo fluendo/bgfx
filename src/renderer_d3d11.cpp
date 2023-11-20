@@ -1837,6 +1837,11 @@ namespace bgfx { namespace d3d11
 			return nullptr;
 		}
 
+		void textureWrappedRecoverState(TextureHandle /* _handle*/) override
+		{
+			BX_ASSERT(0, "Not implemented yet");
+		}
+
 		void createFence(FenceHandle /*_handle*/, uint64_t /*_initialValue*/, uint64_t /*_flags*/) override
 		{
 			BX_ASSERT(0, "Not implemented yet");

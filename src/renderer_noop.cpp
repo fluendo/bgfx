@@ -168,6 +168,11 @@ namespace bgfx { namespace noop
 			return nullptr;
 		}
 
+		void textureWrappedRecoverState(TextureHandle /* _handle*/) override
+		{
+			BX_ASSERT(0, "Not implemented yet");
+		}
+
 		TextureRef createTextureWrappedRef(TextureHandle /*_handle*/, void* /*_platform_specific_wrapping_data*/) override
 		{
 			BX_ASSERT(0, "Not implemented yet");
